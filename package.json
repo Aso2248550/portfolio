@@ -8,11 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
-<<<<<<< HEAD
     "mssql": "^9.3.1",
-=======
-    "mssql": "^9.3.1"
->>>>>>> 7067fe4acb87503e0cbddc5801e9a25f6df165c1
     "next": "15.5.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
