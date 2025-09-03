@@ -9,34 +9,12 @@ body {
   line-height: 1.6;
 }
 
-header {
-  background: #333;
+header a {
   color: white;
-  padding: 1rem;
-}
-
-header nav a {
-  color: white;
-  margin-right: 1rem;
   text-decoration: none;
+  font-weight: bold;
 }
 
-main {
-  padding: 2rem;
-}
-
-footer {
-  background: #333;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  header nav a {
-    display: block;
-    margin-bottom: 0.5rem;
-  }
+header a:hover {
+  text-decoration: underline;
 }

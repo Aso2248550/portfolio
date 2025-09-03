@@ -1,32 +1,35 @@
 import sql from "mssql";
 
 const config = {
-  user: "asosalih_SQLLogin_1",      // user id from connection string
-  password: "Aso#1963_123",         // pwd from connection string
-  server: "aso_db1.mssql.somee.com", // data source / server
-  database: "aso_db1",              // initial catalog
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_NAME,
   options: {
-    encrypt: true,                  // required for Azure/Somee
-    trustServerCertificate: true,   // per connection string
-  },
-  // Optional: packetSize if needed
-  // pool: { max: 10, min: 0, idleTimeoutMillis: 30000 }
+    encrypt: true,
+    trustServerCertificate: true
+  }
 };
 
 let pool;
 
+export async function sqlConnect() {
+  if (!pool) {
+    pool = await sql.connect(config);
+  }
+  return pool;
+}
+
 export async function getProducts() {
   try {
-    if (!pool) {
-      pool = await sql.connect(config);
-    }
+    const pool = await sqlConnect();
     const result = await pool.request().query(`
       SELECT productId, Title, Description, CategoryID, Price, Quantity, ProductImage
       FROM products
     `);
     return result.recordset;
   } catch (err) {
-    console.error("DB Error:", err);
+    console.error("❌ DB Error:", err);
     return [];
   }
 }

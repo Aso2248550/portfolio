@@ -1,4 +1,5 @@
 import { getProducts } from "@/lib/db";
+import Image from "next/image";
 
 export default async function ProductsPage() {
   const products = await getProducts();
@@ -13,6 +14,7 @@ export default async function ProductsPage() {
         marginTop: "2rem"
       }}>
         {products.length === 0 && <p>No products found.</p>}
+
         {products.map((product) => (
           <div key={product.productId} style={{
             border: "1px solid #ccc",
@@ -22,10 +24,13 @@ export default async function ProductsPage() {
             boxShadow: "0 2px 10px rgba(0,0,0,0.1)"
           }}>
             {product.ProductImage ? (
-              <img
+              <Image
                 src={`/images/products/${product.ProductImage}`}
                 alt={product.Title}
-                style={{ width: "100%", height: "200px", objectFit: "cover" }}
+                width={400}
+                height={300}
+                style={{ objectFit: "cover", width: "100%", height: "200px" }}
+                priority
               />
             ) : (
               <div style={{
@@ -39,6 +44,7 @@ export default async function ProductsPage() {
                 No Image
               </div>
             )}
+
             <div style={{ padding: "1rem" }}>
               <h2>{product.Title}</h2>
               <p>{product.Description}</p>
